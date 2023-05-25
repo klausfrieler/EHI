@@ -117,13 +117,13 @@ audio_NAFC_page_flex <- function(label,
     #browser()
     #answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
     answer <- input$last_btn_pressed
-    correct <- EHI_item_bank[EHI_item_bank$item_number == label,]$emotion == answer
+    correct <- EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label,]$emotion == answer
 
-    messagef("[%s] Label: %s, Correct: %s, answer: %s",
-             audio_url,
-             label,
-             EHI_item_bank[EHI_item_bank$item_number == label,]$emotion,
-             answer)
+    # messagef("[%s] Label: %s, Correct: %s, answer: %s",
+    #          audio_url,
+    #          label,
+    #          EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label,]$emotion,
+    #          answer)
     tibble(answer = answer,
            label = label,
            correct = correct)

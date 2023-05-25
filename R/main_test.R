@@ -27,7 +27,7 @@ scoring <- function(){
 # }
 
 get_balanced_sample <- function(){
-  tmp <- EHI_item_bank %>%
+  tmp <- EHI::EHI_item_bank %>%
     filter(usage == "test") %>%
     mutate(sid = sprintf("%s_%s_%s", emotion, sentence, speaker),
            sid_ext = sprintf("%s_%s_%s_%s", emotion, sentence, speaker, variant))
@@ -53,7 +53,7 @@ main_test <- function(label,
   # }
   # print(item_sequence)
   for(i in 1:length(item_sequence)){
-    item <- EHI::EHI_item_bank %>% filter(item_number %in% item_sequence[i])
+    item <- item_bank %>% filter(item_number %in% item_sequence[i])
     emotion <- psychTestR::i18n(item[1,]$task_group)
     print(item[1,]$emotion)
     item_page <- EHI_item(label = item_sequence[i],
