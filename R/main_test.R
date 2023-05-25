@@ -55,7 +55,6 @@ main_test <- function(label,
   for(i in 1:length(item_sequence)){
     item <- item_bank %>% filter(item_number %in% item_sequence[i])
     emotion <- psychTestR::i18n(item[1,]$task_group)
-    print(item[1,]$emotion)
     item_page <- EHI_item(label = item_sequence[i],
                           correct_answer =  force(item[1,]$emotion),
                           prompt = get_prompt(i,
