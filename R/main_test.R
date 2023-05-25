@@ -26,9 +26,12 @@ scoring <- function(){
 #          EHI::EHI_item_bank$difficulty <= upper_sd)
 # }
 
-get_balanced_sample <- function(){
+get_balanced_sample <- function(max_sets = 4){
   tmp <- EHI::EHI_item_bank %>%
-    filter(usage == "test") %>%
+    group_by(emotion, usage) %>%
+    mutate(id = 1:n()) %>%
+    ungroup() %>%
+    filter(usage == "test", id <= max_sets * 4) %>%
     mutate(sid = sprintf("%s_%s_%s", emotion, sentence, speaker),
            sid_ext = sprintf("%s_%s_%s_%s", emotion, sentence, speaker, variant))
   sids <- unique(tmp$sid)

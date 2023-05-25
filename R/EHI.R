@@ -44,7 +44,7 @@ EHI <- function(num_items = 24L,
   not_good <- TRUE
   while(not_good){
     messagef("Sampling...")
-    item_sequence <- get_balanced_sample()
+    item_sequence <- get_balanced_sample(num_items / 6)
     not_good <- "sad9" %in% item_sequence
   }
 
