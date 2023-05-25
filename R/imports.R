@@ -7,7 +7,13 @@ NULL
 #' @importFrom dplyr "filter"
 NULL
 
+#' @importFrom dplyr "group_by"
+NULL
+
 #' @importFrom dplyr "pull"
+NULL
+
+#' @importFrom dplyr "ungroup"
 NULL
 
 #' @importFrom tibble "tibble"
