@@ -7,6 +7,7 @@
 EHI(
   num_items = 24L,
   with_welcome = FALSE,
+  with_volume_calibration = FALSE,
   take_training = FALSE,
   with_finish = FALSE,
   label = "EHI",

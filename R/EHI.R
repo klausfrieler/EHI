@@ -26,6 +26,7 @@ library(psychTestR)
 
 EHI <- function(num_items = 24L,
                 with_welcome = FALSE,
+                with_volume_calibration = FALSE,
                 take_training = FALSE,
                 with_finish = FALSE,
                 label = "EHI",
@@ -47,9 +48,18 @@ EHI <- function(num_items = 24L,
     item_sequence <- get_balanced_sample(num_items / 6)
     not_good <- "sad9" %in% item_sequence
   }
-
+  EHI_calibration_page <- psychTestR::new_timeline(
+    psychTestR::volume_calibration_page(url = file.path(audio_dir,
+                                                        EHI::EHI_item_bank[EHI::EHI_item_bank$usage == "volume_check",]$audio_file),
+                                        prompt = shiny::p(psychTestR::i18n("VOLUME"),
+                                                          style = "margin-left:20%;margin-right:20%;width:60%;display:block;text-align:justify"),
+                                        button_text = psychTestR::i18n("CONTINUE"),
+                                        btn_play_prompt = psychTestR::i18n("CLICK_HERE_TO_PLAY"),
+                                        show_controls = TRUE),
+    dict = dict)
   psychTestR::join(
     psychTestR::begin_module(label),
+    if(with_volume_calibration) EHI_calibration_page,
     if (take_training) psychTestR::new_timeline(instructions(audio_dir), dict = dict),
     if (with_welcome && !take_training) EHI_welcome_page(),
     psychTestR::new_timeline(

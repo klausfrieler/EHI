@@ -10,6 +10,7 @@ EHI_standalone(
   with_id = FALSE,
   with_feedback = FALSE,
   with_welcome = TRUE,
+  with_volume_calibration = TRUE,
   admin_password = "conifer",
   researcher_email = "longgoldstudy@gmail.com",
   languages = c("en", "de", "de_f"),
