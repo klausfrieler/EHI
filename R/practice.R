@@ -33,7 +33,7 @@ get_practice_page <- function(page_no, feedback, audio_dir){
     page <- ask_repeat(prompt)
   }
   else{
-    practice_audio <- EHI::EHI_item_bank %>% filter(usage == "practice") %>% slice(page_no) %>% pull(audio_file)
+    practice_audio <- EHI::EHI_item_bank[EHI::EHI_item_bank$usage == "practice",]$audio_file[page_no]
     page <- EHI_item(label = sprintf("training%s", page_no),
                      correct_answer = training_answers[page_no],
                      prompt = prompt,
