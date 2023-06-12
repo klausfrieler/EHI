@@ -43,7 +43,7 @@ EHI <- function(num_items = 24L,
   audio_dir <- gsub("/$", "", audio_dir)
   not_good <- TRUE
   while(not_good){
-    messagef("Sampling...")
+    #messagef("Sampling...")
     item_sequence <- get_balanced_sample(num_items / 6)
     not_good <- "sad9" %in% item_sequence
   }
@@ -51,7 +51,7 @@ EHI <- function(num_items = 24L,
   psychTestR::join(
     psychTestR::begin_module(label),
     if (take_training) psychTestR::new_timeline(instructions(audio_dir), dict = dict),
-    if (with_welcome) EHI_welcome_page(),
+    if (with_welcome && !take_training) EHI_welcome_page(),
     psychTestR::new_timeline(
       main_test(label = label,
                 item_sequence,

@@ -149,7 +149,7 @@ EHI_item <- function(label = "",
   #browser()
   page_prompt <- shiny::div(prompt)
   choices <- c("angry", "happy", "sad")
-  labels <- lapply(unique(EHI::EHI_item_bank$task_group), psychTestR::i18n)
+  labels <- lapply(na.omit(unique(EHI::EHI_item_bank$task_group)), psychTestR::i18n)
   audio_url <- file.path(audio_dir, audio_file)
   #print(correct_answer)
   audio_NAFC_page_flex(label = label,

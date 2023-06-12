@@ -10,8 +10,6 @@ instructions <- function(audio_dir) {
       psychTestR::set_local("do_intro", TRUE, state)
     }),
     info_page("INSTRUCTIONS"),
-    show_sample_page(audio_dir),
-    show_second_sample_page(audio_dir),
     psychTestR::while_loop(
       test = function(state, ...) psychTestR::get_local("do_intro", state),
       logic = practice(audio_dir)

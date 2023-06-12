@@ -55,6 +55,8 @@ main_test <- function(label,
   #   not_good <- "sad9" %in% item_sequence
   # }
   # print(item_sequence)
+  #browser()
+
   for(i in 1:length(item_sequence)){
     item <- item_bank %>% filter(item_number %in% item_sequence[i])
     emotion <- psychTestR::i18n(item[1,]$task_group)

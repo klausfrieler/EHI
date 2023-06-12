@@ -1,4 +1,4 @@
-training_answers  <- c(1, 2, -1)
+training_answers  <- c("sad", "angry", "sad")
 
 ask_repeat <- function(prompt) {
   psychTestR::NAFC_page(
@@ -17,7 +17,7 @@ ask_repeat <- function(prompt) {
 make_practice_page <- function(page_no, audio_dir) {
   psychTestR::reactive_page(function(answer, ...) {
     correct <- "INCORRECT"
-    if (page_no > 1 && answer == training_answers[page_no-1]) correct <- "CORRECT"
+    if (page_no > 1 && answer == training_answers[page_no - 1]) correct <- "CORRECT"
     feedback <- psychTestR::i18n(correct)
     get_practice_page(page_no, feedback, audio_dir)
   })
@@ -25,20 +25,20 @@ make_practice_page <- function(page_no, audio_dir) {
 
 get_practice_page <- function(page_no, feedback, audio_dir){
   key <- sprintf("PRACTICE%d", page_no)
-
-  if(page_no == 3) key <- "TRANSITION"
+  #messagef("Page no: %d", page_no)
+  if(page_no == 4) key <- "TRANSITION"
   prompt <- psychTestR::i18n(key, html = T, sub = list(feedback = feedback))
 
-  if(page_no == 3){
+  if(page_no == 4){
     page <- ask_repeat(prompt)
   }
   else{
+    practice_audio <- EHI::EHI_item_bank %>% filter(usage == "practice") %>% slice(page_no) %>% pull(audio_file)
     page <- EHI_item(label = sprintf("training%s", page_no),
                      correct_answer = training_answers[page_no],
-                     emotion = NULL,
                      prompt = prompt,
                      audio_dir = audio_dir,
-                     audio_file = sprintf("Demo-%s.mp3", page_no + 1),
+                     audio_file = practice_audio,
                      save_answer = FALSE,
                      instruction_page = FALSE)
   }
@@ -46,5 +46,5 @@ get_practice_page <- function(page_no, feedback, audio_dir){
 }
 
 practice <- function(audio_dir) {
-  lapply(1:3, make_practice_page, audio_dir) %>% unlist()
+  lapply(1:4, make_practice_page, audio_dir) %>% unlist()
 }
