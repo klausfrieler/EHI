@@ -138,7 +138,6 @@ show_item <- function(audio_dir) {
       label = paste0("q", item_number),
       audio_file = item$audio_file,
       correct_answer = item$emotion,
-      adaptive = TRUE,
       prompt = get_prompt(item_number, num_items, emotion),
       audio_dir = audio_dir,
       save_answer = TRUE,
