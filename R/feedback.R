@@ -72,7 +72,7 @@ EHI_feedback_graph_normal_curve <- function(perc_correct, x_min = 40, x_max = 16
 EHI_feedback_with_graph <- function(dict = EHI::EHI_dict) {
   psychTestR::new_timeline(
       psychTestR::reactive_page(function(state, ...) {
-        browser()
+        #browser()
         results <- psychTestR::get_results(state = state,
                                            complete = TRUE,
                                            add_session_info = FALSE) %>% as.list()
