@@ -35,6 +35,7 @@ EHI <- function(num_items = 24L,
                 ) {
   audio_dir <- "https://media.gold-msi.org/test_materials/EHI"
   stopifnot(purrr::is_scalar_character(label),
+            num_items > 1,
             purrr::is_scalar_integer(num_items) || purrr::is_scalar_double(num_items),
             purrr::is_scalar_character(audio_dir),
             psychTestR::is.timeline(feedback) ||
@@ -43,6 +44,7 @@ EHI <- function(num_items = 24L,
               is.null(feedback))
   audio_dir <- gsub("/$", "", audio_dir)
   not_good <- TRUE
+  browser()
   while(not_good){
     #messagef("Sampling...")
     item_sequence <- get_balanced_sample(num_items / 6)
