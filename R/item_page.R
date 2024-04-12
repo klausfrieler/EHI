@@ -114,10 +114,9 @@ audio_NAFC_page_flex <- function(label,
       id = "response_ui")
   )
   get_answer <- function(input, ...) {
-    #browser()
     #answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
     answer <- input$last_btn_pressed
-    correct <- EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label,]$emotion == answer
+    correct <- EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label & EHI::EHI_item_bank$usage == "test",]$emotion == answer
 
     # messagef("[%s] Label: %s, Correct: %s, answer: %s",
     #          audio_url,

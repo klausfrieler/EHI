@@ -8,7 +8,7 @@ scoring <- function(){
     sum_score <- sum(purrr::map_lgl(results$EHI, function(x) x$correct))
     num_question <- length(results$EHI)
     perc_correct <- sum_score/num_question
-    messagef("EHI: questions: %d, Correct: %d, perc_corrct: %.3f", num_question, sum_score, perc_correct)
+    messagef("EHI: questions: %d, Correct: %d, perc_correct: %.3f", num_question, sum_score, perc_correct)
     psychTestR::save_result(place = state,
                  label = "score",
                  value = perc_correct)
@@ -47,15 +47,6 @@ main_test <- function(label,
                       ...) {
   elts <- c()
   item_bank <- EHI::EHI_item_bank
-  #item_sequence <- sample(1:nrow(item_bank), num_items)
-  # not_good <- TRUE
-  # while(not_good){
-  #   messagef("Sampling...")
-  #   item_sequence <- get_balanced_sample()
-  #   not_good <- "sad9" %in% item_sequence
-  # }
-  # print(item_sequence)
-  #browser()
 
   for(i in 1:length(item_sequence)){
     item <- item_bank %>% filter(item_number %in% item_sequence[i])
