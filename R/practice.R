@@ -34,13 +34,16 @@ get_practice_page <- function(page_no, feedback, audio_dir){
   }
   else{
     practice_audio <- EHI::EHI_item_bank[EHI::EHI_item_bank$usage == "practice",]$audio_file[page_no]
+    get_answer_practice <- function(input, ...){
+      input$last_btn_pressed
+    }
     page <- EHI_item(label = sprintf("training%s", page_no),
                      correct_answer = training_answers[page_no],
                      prompt = prompt,
                      audio_dir = audio_dir,
                      audio_file = practice_audio,
                      save_answer = FALSE,
-                     instruction_page = FALSE)
+                     get_answer = get_answer_practice)
   }
   page
 }

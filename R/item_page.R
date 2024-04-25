@@ -113,19 +113,21 @@ audio_NAFC_page_flex <- function(label,
       arrange_vertically = FALSE,
       id = "response_ui")
   )
-  get_answer <- function(input, ...) {
-    #answer <- as.numeric(gsub("answer", "", input$last_btn_pressed))
-    answer <- input$last_btn_pressed
-    correct <- EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label & EHI::EHI_item_bank$usage == "test",]$emotion == answer
+  if(is.null(get_answer)){
+    get_answer <- function(input, ...) {
+      browser()
+      answer <- input$last_btn_pressed
+      correct <- EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label & EHI::EHI_item_bank$usage == "test",]$emotion == answer
 
-    # messagef("[%s] Label: %s, Correct: %s, answer: %s",
-    #          audio_url,
-    #          label,
-    #          EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label,]$emotion,
-    #          answer)
-    tibble(answer = answer,
-           label = label,
-           correct = correct)
+      # messagef("[%s] Label: %s, Correct: %s, answer: %s",
+      #          audio_url,
+      #          label,
+      #          EHI::EHI_item_bank[EHI::EHI_item_bank$item_number == label,]$emotion,
+      #          answer)
+      tibble(answer = answer,
+             label = label,
+             correct = correct)
+    }
   }
   validate <- function(answer, ...) !is.null(answer)
   psychTestR::page(ui = ui, label = label,
@@ -142,8 +144,7 @@ EHI_item <- function(label = "",
                      audio_dir = "",
                      save_answer = TRUE,
                      on_complete = NULL,
-                     get_answer = NULL,
-                     instruction_page = FALSE
+                     get_answer = NULL
                      ){
   #browser()
   page_prompt <- shiny::div(prompt)

@@ -118,23 +118,3 @@ EHI_final_page <- function(dict = EHI::EHI_dict){
     ), dict = dict)
 }
 
-show_item <- function(audio_dir) {
-  function(item, ...) {
-    #stopifnot(is(item, "item"), nrow(item) == 1L)
-    item_number <- psychTestRCAT::get_item_number(item)
-    num_items <- psychTestRCAT::get_num_items_in_test(item)
-    emotion <- psychTestR::i18n(item[1,]$emotion_i18)
-    #messagef("Showing item %s, correct = %s", item_number, item$answer)
-    EHI_item(
-      label = paste0("q", item_number),
-      audio_file = item$audio_file,
-      correct_answer = item$emotion,
-      prompt = get_prompt(item_number, num_items, emotion),
-      audio_dir = audio_dir,
-      save_answer = TRUE,
-      get_answer = NULL,
-      on_complete = NULL,
-      instruction_page = FALSE
-    )
-  }
-}
